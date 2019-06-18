@@ -1,0 +1,14 @@
+
+
+<div class="gallery-list">
+<ng-container *ngFor="let photo of clientService.listPhoto ; let i = index">
+    <img [src]="photo.urlImage" (click)="switchMode(i)">
+  </ng-container>
+</div>
+  <div 
+  infiniteScroll
+  [infiniteScrollDistance]="0.5"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()"></div>
+
+
