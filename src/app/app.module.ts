@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { LightboxModule } from 'ngx-lightbox';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { AppComponent } from './components/layout/app.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
   ],
   imports: [
     BrowserModule,
-    LightboxModule,
+    NgxSmartModalModule.forRoot(),
     InfiniteScrollModule,
     HttpClientModule,
     AppRoutingModule

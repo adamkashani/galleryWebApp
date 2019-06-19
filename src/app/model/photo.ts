@@ -9,6 +9,8 @@ export class Photo {
         public secret?: string,
         public server?: string,
         public title?: string,
-        public urlImage?:string
+        public urlImage?: string,
+        public minSizeUrl?: string,
+        public maxSizeUrl: string = null
     ) { }
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/service/client.service';
-import { Router} from '@angular/router';
-import { Lightbox, IAlbum } from 'ngx-lightbox';
-import { Photo } from 'src/app/model/photo';
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
   selector: 'app-gallery',
@@ -11,30 +9,26 @@ import { Photo } from 'src/app/model/photo';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor(public clientService:ClientService , private _lightbox: Lightbox) { }
+  constructor(public clientService: ClientService,public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
 
-  onScroll(){
+  onScroll() {
     console.log(`scroling....`)
     this.clientService.search(this.clientService.tag)
   }
 
-  switchMode(index : number){
+  switchMode(index: number) {
     console.log(index)
-    const albums : Array<IAlbum> = this.createAlbumList(this.clientService.listPhoto)
-    console.log(`the albums array : ` , albums)
-     // open lightbox
-     this._lightbox.open(albums , index);
+    this.clientService.indexPopup = index;
+    this.ngxSmartModalService.open('myModal');
   }
 
-  createAlbumList(list : Array<Photo>):Array<IAlbum>{
-    const albums : Array<IAlbum> = []
-    list.forEach(element => {
-       let album = {src:element.urlImage , thumb:element.urlImage}
-       albums.push(album)
-    });
-    return albums;
+  prev(){
+    this.clientService.indexPopup--;
+  }
+  next(){
+    this.clientService.indexPopup++;
   }
 }

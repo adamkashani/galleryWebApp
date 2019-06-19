@@ -1,14 +1,28 @@
 
-
 <div class="gallery-list">
-<ng-container *ngFor="let photo of clientService.listPhoto ; let i = index">
-    <img [src]="photo.urlImage" (click)="switchMode(i)">
+  <ng-container *ngFor="let photo of clientService.listPhoto ; let i = index">
+    <img [src]="photo.urlImage" (click)="switchMode(i)" class="image" >
   </ng-container>
 </div>
-  <div 
-  infiniteScroll
-  [infiniteScrollDistance]="0.5"
-  [infiniteScrollThrottle]="1000"
-  (scrolled)="onScroll()"></div>
+
+<!-- handler scroll event -->
+<div infiniteScroll 
+[infiniteScrollDistance]="0.5"
+[infiniteScrollThrottle]="1000"
+(scrolled)="onScroll()"></div>
 
 
+<!-- popup component -->
+<ngx-smart-modal #myModal identifier="myModal" *ngIf="clientService.listPhoto[0]" class="center">
+
+    <span *ngIf="clientService.listPhoto[clientService.indexPopup-1]">
+      <img (click)="prev()" [src]="clientService.listPhoto[clientService.indexPopup-1].minSizeUrl" class="minImage">
+    </span>
+    <span>
+      <img [src]="clientService.listPhoto[clientService.indexPopup].maxSizeUrl" class="maxImage" >
+    </span>
+    <span  *ngIf="clientService.listPhoto[clientService.indexPopup+1]">
+      <img (click)="next()" [src]="clientService.listPhoto[clientService.indexPopup+1].minSizeUrl" class="minImage" >
+    </span>
+
+</ngx-smart-modal>
