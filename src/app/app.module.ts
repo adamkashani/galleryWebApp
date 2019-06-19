@@ -7,11 +7,13 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { AppRoutingModule } from './app-routing.module';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { AppComponent } from './components/layout/app.component';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GalleryComponent
+    GalleryComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

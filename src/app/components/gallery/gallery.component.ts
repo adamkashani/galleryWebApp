@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from 'src/app/service/client.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -9,9 +10,21 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor(public clientService: ClientService,public ngxSmartModalService: NgxSmartModalService) { }
+  parentSubject: Subject<number> = new Subject();
+
+  constructor(public clientService: ClientService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
+  }
+  
+  search(tag:string){
+    if(tag.length>0){
+      this.clientService.clean();
+      this.clientService.tag=tag;
+      this.clientService.search(this.clientService.tag);
+    }else{
+      alert(`you must insert text to the input`)
+    }
   }
 
   onScroll() {
@@ -21,14 +34,6 @@ export class GalleryComponent implements OnInit {
 
   switchMode(index: number) {
     console.log(index)
-    this.clientService.indexPopup = index;
-    this.ngxSmartModalService.open('myModal');
-  }
-
-  prev(){
-    this.clientService.indexPopup--;
-  }
-  next(){
-    this.clientService.indexPopup++;
+    this.parentSubject.next(index);
   }
 }

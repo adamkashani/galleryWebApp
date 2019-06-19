@@ -1,0 +1,15 @@
+<!-- popup component -->
+
+<ngx-smart-modal #myModal identifier="myModal" *ngIf="clientService.listPhoto[0]" class="center">
+
+    <span *ngIf="clientService.listPhoto[clientService.indexPopup-1]">
+      <img (click)="prev()" [src]="clientService.listPhoto[clientService.indexPopup-1].minSizeUrl" class="minImage">
+    </span>
+    <span>
+      <img [src]="clientService.listPhoto[clientService.indexPopup].maxSizeUrl" class="maxImage" >
+    </span>
+    <span  *ngIf="clientService.listPhoto[clientService.indexPopup+1]">
+      <img (click)="next()" [src]="clientService.listPhoto[clientService.indexPopup+1].minSizeUrl" class="minImage" >
+    </span>
+
+</ngx-smart-modal>
