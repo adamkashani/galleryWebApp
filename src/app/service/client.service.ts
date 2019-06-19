@@ -8,8 +8,6 @@ import { Photos } from '../model/photos';
 })
 export class ClientService {
 
-  indexPopup:number = 0;
-
   listPhoto: Array<Photo> = [];
 
   page: number = 1;
@@ -68,5 +66,4 @@ export class ClientService {
     this.page = 1;
     this.listPhoto = [];
   }
-
 }
