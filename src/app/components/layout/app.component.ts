@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ClientService } from '../../service/client.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,5 @@ import { ClientService } from '../../service/client.service';
 })
 export class AppComponent {
   title = 'Gallery Web Side';
-  constructor(public clientService:ClientService){}
+  constructor(){}
 }

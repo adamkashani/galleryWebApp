@@ -13,20 +13,21 @@ export class PopupComponent implements OnInit {
   @Input()
   parentSubject: Subject<number>;
 
-  indexPopup : number = 0 ;
+  indexPopup: number = 0;
 
   constructor(public clientService: ClientService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
     this.parentSubject.subscribe(event => {
       this.indexPopup = event;
-      this.ngxSmartModalService.open('myModal');
+      this.ngxSmartModalService.open('popupModal');
     });
   }
 
   prev() {
     this.indexPopup--;
   }
+
   next() {
     this.indexPopup++;
   }
@@ -34,5 +35,4 @@ export class PopupComponent implements OnInit {
   ngOnDestroy() {
     this.parentSubject.unsubscribe();
   }
-
 }

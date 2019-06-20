@@ -19,6 +19,7 @@ export class GalleryComponent implements OnInit {
   
   search(tag:string){
     if(tag.length>0){
+      this.clientService.loader = true;
       this.clientService.clean();
       this.clientService.tag=tag;
       this.clientService.search(this.clientService.tag);
@@ -26,14 +27,14 @@ export class GalleryComponent implements OnInit {
       alert(`you must insert text to the input`)
     }
   }
-
+  
   onScroll() {
     console.log(`scroling....`)
+    this.clientService.loader = true;
     this.clientService.search(this.clientService.tag)
   }
 
   switchMode(index: number) {
-    console.log(index)
     this.parentSubject.next(index);
   }
 }
