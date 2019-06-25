@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ClientService } from 'src/app/service/client.service';
@@ -8,7 +8,7 @@ import { ClientService } from 'src/app/service/client.service';
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss']
 })
-export class PopupComponent implements OnInit {
+export class PopupComponent implements OnInit , OnDestroy{
 
   @Input()
   parentSubject: Subject<number>;

@@ -10,28 +10,31 @@ import { Subject } from 'rxjs';
 })
 export class GalleryComponent implements OnInit {
 
+  tag: string = '';
   parentSubject: Subject<number> = new Subject();
 
   constructor(public clientService: ClientService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {
   }
-  
-  search(tag:string){
-    if(tag.length>0){
-      this.clientService.loader = true;
-      this.clientService.clean();
-      this.clientService.tag=tag;
-      this.clientService.search(this.clientService.tag);
-    }else{
+
+  search(tag: string) {
+    if (tag.length > 0) {
+      if (tag != this.tag) {
+        this.clientService.loader = true;
+        this.clientService.clean();
+        this.tag = tag;
+        this.clientService.search(this.tag);
+      }
+    } else {
       alert(`you must insert text to the input`)
     }
   }
-  
+
   onScroll() {
     console.log(`scroling....`)
     this.clientService.loader = true;
-    this.clientService.search(this.clientService.tag)
+    this.clientService.search(this.tag)
   }
 
   switchMode(index: number) {
