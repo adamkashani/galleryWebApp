@@ -28,8 +28,8 @@ export class ClientService {
       console.log(listResult)
       if (listResult[0]) {
         //get the image urls from flickr
-        listResult.forEach(async element => {
-          const resolve = await this.getSize(element)
+        listResult.forEach(async (element) => {
+          const resolve = await this.getSize(element.id)
           Object.assign(element, resolve)
           console.log(`from resolve : ${resolve}`)
           this.listPhoto.push(element)
@@ -50,9 +50,9 @@ export class ClientService {
     )
   }
 
-  async getSize(photo: Photo) {
+  async getSize(id: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      let sizeUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=43524ac84f8f5f79e04fc54892535281&photo_id=${photo.id}&format=json&nojsoncallback=1`
+      let sizeUrl = `https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=43524ac84f8f5f79e04fc54892535281&photo_id=${id}&format=json&nojsoncallback=1`
       this.httpClient.get(sizeUrl).subscribe((next) => {
         let format = Object.values(next)[0];
         let size = Object.values(format)[3];
@@ -60,6 +60,8 @@ export class ClientService {
         let labelNormal = size[4]
         let labelSquare = size[1]
         return resolve({ maxSizeUrl: labelBig.source, urlImage: labelNormal.source, minSizeUrl: labelSquare.source })
+      }, (error) => {
+        return reject(error)
       });
     })
   }
